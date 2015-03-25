@@ -1,3 +1,198 @@
+walinuxagent (2.0.12-0ubuntu1) vivid; urgency=medium
+
+  * New upstream release.
+  * Added debian/watch
+  * Added systemd unit for dataloss warning
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Wed, 25 Mar 2015 11:04:05 -0600
+
+walinuxagent (2.0.8-0ubuntu7) vivid; urgency=medium
+
+  * Added /lib/udev/rules.d/66-azure-storage.rules: create symlinks for
+    /dev/disk/azure/{root,resource} to correctly identify disks
+    (LP: #1411582).
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Mon, 09 Mar 2015 06:26:48 -0600
+
+walinuxagent (2.0.8-0ubuntu6) vivid; urgency=medium
+
+  * Changed systemd unit file to allow for cloud-init to run first.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Tue, 02 Dec 2014 21:53:06 -0700
+
+walinuxagent (2.0.8-0ubuntu5) vivid; urgency=medium
+
+  * Changes to support systemd
+    - debian/walinuxagent.service: symlink to upstream service
+    - debian/rules: build with systemd
+    - debain/control: added dh_python and dh_systemd to build deps
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Wed, 26 Nov 2014 11:41:59 -0700
+
+walinuxagent (2.0.8-0ubuntu4) vivid; urgency=medium
+
+  * Moved dependency of linux-image-extra-virtual to recommends.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Tue, 18 Nov 2014 05:40:07 -0700
+
+walinuxagent (2.0.8-0ubuntu3) vivid; urgency=medium
+
+  * Changed startup ordering to on ephemeral disk warning as the warning
+    is not written on first boot.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Fri, 07 Nov 2014 07:02:18 -0700
+
+walinuxagent (2.0.8-0ubuntu2) vivid; urgency=medium
+
+  * Add upstart job to add "readme" on Azure ephemeral disk (LP: #1382257).
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Thu, 06 Nov 2014 16:33:42 -0700
+
+walinuxagent (2.0.8-0ubuntu1) utopic; urgency=medium
+
+  * New upstream release (LP: #1356479).
+    - Fixed issue of reporting SSH keys to fabric
+      - wait for Cloud-init to provision the host keys
+    - Multiple fixes for extension handlers
+      - capture output of subprocess, prevent subprocess failure
+      - prevent fabric from continuously querying host if no extensions
+        are installed.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Fri, 29 Aug 2014 10:11:12 -0600
+
+walinuxagent (2.0.5-0ubuntu3) utopic; urgency=medium
+
+  * Restrict builds to amd64 only (LP: #1326018).
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Tue, 03 Jun 2014 09:21:20 -0600
+
+walinuxagent (2.0.5-0ubuntu1) utopic; urgency=medium
+
+  * New upstream release (LP: #1321024).
+    - Multiple fixes for extension handler framework
+      - New logging support
+      - Add state handling for each extension
+      - Properly handle non-JSON extensions
+      -  Several other bugfixes
+    - Replace platform.* calls with DistInfo() function
+    - EnvMonitor - Set SCSI I/O timeout for all attached disks
+  * Packaging changes
+    - Rebased Ubuntu packaging patches from 2.0.4.
+    - Updated Debian standards from 3.9.4 to 3.9.5.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Tue, 20 May 2014 08:26:50 -0600
+
+walinuxagent (2.0.4-0ubuntu2) trusty; urgency=low
+
+  * Fix for broken sshd configuration (LP: #1305418)
+   - Change modification of sshd_config to address lack of newline at EOF
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Thu, 10 Apr 2014 14:04:44 -0600
+
+walinuxagent (2.0.4-0ubuntu1) trusty; urgency=medium
+
+  * Update to latest upstream version 2.0.4 (LP: #1304023).
+    - Includes ability for agent injection.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Mon, 07 Apr 2014 16:48:16 -0600
+
+walinuxagent (2.0.3-0ubuntu2) trusty; urgency=low
+
+  * Change /etc/dhcp/dhclient.conf 'send host-name' during post-inst to
+    fix snapshotting instances (LP: #1268050).
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Tue, 18 Mar 2014 17:14:41 -0600
+
+walinuxagent (2.0.3-0ubuntu1) trusty; urgency=low
+
+  * Update to latest upstream version 2.0.3 (LP: #1249052).
+    - use python-setuptools to do installation, dropping the {pre,post}insts.
+    - dropped the walinuxagent-datasaver packages as no longer needed.
+    - use packaged default configuration file by default.
+  * Rebased relevant patches from 1.3.x:
+    - debian/patches/disable_provisioning.patch: disable provisioning
+      features infavor of WALinuxAgent cloud-init support.
+    - debian/patches/disable-udev-rules.patch: disable UDEV rule mangling
+  * Include default Cloud-init configuration
+    - configures Cloud-init to use the default Azure Datasource.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Fri, 14 Feb 2014 11:55:14 -0700
+
+walinuxagent (1.3.2-0ubuntu8) trusty; urgency=low
+
+  * debian/patches/idns_dhcp.patch: only change send-hostname in
+    dhcpclient.conf when send-hostname is already in the config
+    (LP: #1268050).
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Wed, 15 Jan 2014 13:02:30 -0700
+
+walinuxagent (1.3.2-0ubuntu7) trusty; urgency=low
+
+  * debian/rules: Update for new upstream location.
+  * debian/control: Updated the standards version from 3.9.3 to 3.9.4
+  * updated the description on walinuxagent-datasaver (LP: #1266545)
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Wed, 08 Jan 2014 14:11:13 -0700
+
+walinuxagent (1.3.2-0ubuntu5) saucy; urgency=low
+
+  * disable ephemeral disk formating by default (LP: #1231490)
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Thu, 26 Sep 2013 08:21:35 -0600
+
+walinuxagent (1.3.2-0ubuntu4) saucy; urgency=low
+
+  * debian/patches/shadow_permissions.patch: apply the appropriate
+    permissions to /etc/shadow (LP: #1188820).
+  * debian/patches/verbose_logging.patch: use the appropriate log
+    faculty when using verbose logging (LP: #1193404).
+  * Mark bugs fixed in 1.3.2-0ubuntu3:
+    debian/patches/config_for_cloud-init.patch:
+    - fix for race condition between cloud-init and waagent  (LP: #1195524)
+    - mount resource disk on /mnt (LP: #1193380)
+    - move walinuxagent init functionality to cloud-init (LP: #1037723)
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Tue, 23 Jul 2013 09:43:40 -0600
+
+walinuxagent (1.3.2-0ubuntu3) saucy; urgency=low
+
+  [ Ben Howard ]
+  * debian/patches/config_for_cloud-init.patch:
+    Modified configuration to disable provisioning functions.
+    walinuxagent for Ubuntu should now be used with Cloud-init.
+  * debian/postinst: Don't overwrite existing /etc/waagent.conf agent
+    configuration on install or upgrade.
+  * debian/upstart: start later in boot, avoiding race conditions
+    with cloud-init.
+
+  [ Scott Moser ]
+  * debian: wrap and sort directory
+  * debian/patches/no_udev_rule_removal.patch: remove 000 prefix in file
+    name. No need for numbering in filenames when we have patches/series.
+
+ -- Scott Moser <smoser@ubuntu.com>  Thu, 11 Jul 2013 17:31:05 -0400
+
+walinuxagent (1.3.2-0ubuntu2) saucy; urgency=low
+
+  * Added logic to prevent udev rules.d movement (LP: #1188753)
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Tue, 11 Jun 2013 14:09:58 -0600
+
+walinuxagent (1.3.2-0ubuntu1) raring; urgency=low
+
+  * Updated to 1.3.2 as part of Windows Azure requirement (LP: #1158465).
+  * Upstream now supports packaging; incorporated upstream packaging into
+    Ubuntu Packaging.
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Thu, 21 Mar 2013 12:57:08 -0600
+
+walinuxagent (1.3-0ubuntu2) raring; urgency=low
+
+  * Changed detection of whether or not agent is packaged to using
+    dpkg command. (LP: #1111690)
+
+ -- Ben Howard <ben.howard@ubuntu.com>  Thu, 31 Jan 2013 11:42:39 -0700
+
 walinuxagent (1.3-0ubuntu1) raring; urgency=low
 
   * New upstream version (LP: #1101371)

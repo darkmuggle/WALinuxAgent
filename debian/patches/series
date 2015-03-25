@@ -1,0 +1,3 @@
+fixup_setup_file.patch
+cloud-init-default-cfg.patch
+disable_provisioning.patch
