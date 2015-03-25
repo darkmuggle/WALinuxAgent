@@ -1,6 +1,6 @@
 --- a/config/waagent.conf
 +++ b/config/waagent.conf
-@@ -14,30 +14,33 @@
+@@ -14,30 +14,34 @@
  Role.TopologyConsumer=None
  
  # Enable instance creation
@@ -36,7 +36,8 @@
  
 +# NOTE: Ubuntu uses Cloud-init for disk-provisioning. This will
 +# unless you disable Cloud-init disk provisioning. Please see
-+# /usr/share/walinuxagent/99-cloud-init-disable-diskprovisioning.conf
++# /usr/share/doc/walinuxagent/99-cloud-init-disable-diskprovisioning.conf
++#
  # Create and use swapfile on resource disk.
  ResourceDisk.EnableSwap=n
  
